@@ -40,3 +40,11 @@ item1 = Item(nome='teclado', cod_barras='123456', preco=100, descricao='teclado 
 db.session.add(item1)
 db.session.commit()
 '''
+
+
+''' from mercado import db,app
+app.app_context().push()
+from mercado.models import User, Item
+user1 = User(username='fulano', email='fulano@com.br', senha='123456', valor=100)
+db.session.add(user1)
+db.session.commit()'''

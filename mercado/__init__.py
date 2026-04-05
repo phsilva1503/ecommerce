@@ -10,4 +10,6 @@ db.init_app(app)
 from mercado import routes
 
 
-
+#FORÇA A CRIAÇÃO DO BANCO DE DADOS, RODAR AEPNAS UMA VEZ E CASO SEJA NECESSARIO RECRIAAR O BANCO
+'''with app.app_context():
+    db.create_all()'''
