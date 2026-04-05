@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+  Home  
+{% endblock %}
+
+{% block conteudo %}
+    <h1 style="text-align: center;">Bem vindo ao curso de Flask</h1>
+    <hr>
+
+    <a href="{{ url_for('listar_produtos') }}">Ir para produtos</a>
+
+    {% for item in itens %}
+    <p>{{ item.nome }} - R$ {{ item.preco }} - {{ item.descricao }} - {{ item.cod_barras }}</p>
+
+{% endfor %}
+{% endblock %}
+
+
