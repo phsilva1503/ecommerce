@@ -2,6 +2,7 @@
 from mercado import app
 from mercado.models import Item
 from flask import render_template
+from .forms import Cadastroform
 
 
 @app.route('/')
@@ -26,20 +27,17 @@ def listar_produtos():
     itens = Item.query.all()
     return render_template('produtos.html', itens=itens)
 
+@app.route('/cadastro')
+def page_cadastro():
+    form = Cadastroform()
+    return render_template('cadastro.html', form = form)
+
 '''
 @app.route('/about/<usuario>')
 def about(usuario):
     return '<h3>About Page</h3><p>This is a simple Flask application. Hello, {}!</p>'.format(usuario)
     '''
 
-
-
-'''para inserir dados no banco de dados, basta usar o terminal do python e rodar os seguintes comandos:
-from mercado import db, Item
-item1 = Item(nome='teclado', cod_barras='123456', preco=100, descricao='teclado mecânico')
-db.session.add(item1)
-db.session.commit()
-'''
 
 
 ''' from mercado import db,app
