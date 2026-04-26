@@ -1,8 +1,9 @@
 
 from mercado import app
-from mercado.models import Item
-from flask import render_template
+from mercado.models import Item, User
+from flask import render_template, redirect, url_for,flash   
 from .forms import Cadastroform
+from mercado import db
 
 
 @app.route('/')
@@ -24,12 +25,27 @@ def page_produtos():
 
 @app.route('/listar_produtos')
 def listar_produtos():
+    form = Cadastroform()
     itens = Item.query.all()
     return render_template('produtos.html', itens=itens)
 
-@app.route('/cadastro')
+@app.route('/cadastro', methods=['GET', 'POST'])
 def page_cadastro():
-    form = Cadastroform()
+    form = Cadastroform() #Instanciando o formulário criado no arquivo forms.py
+    if form.validate_on_submit():# Verificando se o formulário foi submetido e se os dados são válidos
+        usuario = User(
+            username = form.usuario.data,
+            email = form.email.data,
+            senha = form.senha1.data
+        ) #Criando um novo objeto User com os dados do formulário
+        db.session.add(usuario)
+        db.session.commit()
+        return redirect(url_for('page_produtos'))
+    
+    if form.errors != ():
+        for err in form.errors.values():
+            ##print (f"erro ao cadastar usuario {err}")
+            flash(f"erro ao cadastar usuario {err}",category='warning')
     return render_template('cadastro.html', form = form)
 
 '''

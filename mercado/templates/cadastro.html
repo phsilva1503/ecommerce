@@ -12,6 +12,9 @@
             Por favor, crie a sua conta
         </h1>
         <form method="POST" class="form-register" style="color: whitesmoke;">
+            
+            {{ form.hidden_tag() }} <-- Necessário para o CSRF token
+            
             {{ form.usuario.label() }}
             {{ form.usuario(class="form-control", placeholder="Informe o UserName") }}
             
@@ -25,8 +28,9 @@
             {{ form.senha2(class="form-control", placeholder="Confirme a Senha")}}
             <br>
             <div class="d-grid">
-                {{ form.submit(class="btn btn-lg btn-success") }}
+                {{ form.submit(class="btn btn-lg btn-primary") }}
             </div>
+           
         </form>
     </div>
 </body>
