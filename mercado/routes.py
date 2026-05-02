@@ -36,7 +36,7 @@ def page_cadastro():
         usuario = User(
             username = form.usuario.data,
             email = form.email.data,
-            senha = form.senha1.data
+            senhacript = form.senha1.data #Criando um novo objeto User com os dados do formulário, nesse caso a senha é configurada usando a propriedade senhacript, que irá criptografar a senha usando bcrypt e armazená-la no banco de dados.
         ) #Criando um novo objeto User com os dados do formulário
         db.session.add(usuario)
         db.session.commit()
@@ -45,7 +45,7 @@ def page_cadastro():
     if form.errors != ():
         for err in form.errors.values():
             ##print (f"erro ao cadastar usuario {err}")
-            flash(f"erro ao cadastar usuario {err}",category='warning')
+            flash(f"erro ao cadastar usuario {err}",category='danger')
     return render_template('cadastro.html', form = form)
 
 '''
